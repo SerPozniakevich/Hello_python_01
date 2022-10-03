@@ -1,4 +1,6 @@
 from multiprocessing.sharedctypes import Value
+from random import shuffle
+from unittest.mock import patch
 
 
 # print ('Hello World')
@@ -36,7 +38,7 @@ from multiprocessing.sharedctypes import Value
 
 # print(a,' + ', b, ' = ', a+b)
 # print('{} {}'.format(a, b)) #форматированный вывод с указанием порядка вывода
-# print(f'{a} {b}') #форматированный вывод
+# print(f'{a} {b}') #форматированный вывод  
 
 # Арифметические операции
 # +, -, *, /, %, //, **
@@ -147,14 +149,111 @@ f = [1,2,3,4]
 
 #ФУНКЦИИ
 
-def f(x):
-    if x == 1:
-        return 'Целое'
-    elif x == 2.3:
-        return 23
-    else:
-        return
+# def f(x):
+#     if x == 1:
+#         return 'Целое'
+#     elif x == 2.3:
+#         return 23
+#     else:
+#         return
 
-arg = 2.3
-print(f(arg))
-print(type(f(arg)))
+# arg = 2.3
+# print(f(arg))
+# print(type(f(arg)))
+
+# Lection 002
+# ___________________________________
+
+# РАБОТА С ФАЙЛАМИ
+# a - открытие для добавления данных
+# r - открытие для чтения данных
+# w - открытие для записи данных
+
+# colors = ['red', 'green', 'blue'] #Набор данных, в качестве набора данных выступает список
+# data = open('file.txt', 'w') # Создаём переменную "data", связываем её с файлом(путь к файлу), указывая мод как будем работать (а)
+# data.writelines(colors) # разделителей не будет
+# data.close()
+
+# colors = ['red', 'green', 'blue'] #Набор данных, в качестве набора данных выступает список
+# data = open('file.txt', 'w') # Создаём переменную "data", связываем её с файлом(путь к файлу), указывая мод как будем работать (а)
+# data.writelines(colors) # разделителей не будет
+# data.write('\nLINE 2\n')  # дописывание данных в файл с новой строки и заканчивая новой строкой
+# data.write('LINE 3\n')
+# data.close() # закрытие связи с файлом - обязательно!
+
+# конструкция with для работы с файлами
+# в данной конструкции не требуется закрытие файла, закрытие происходит автоматически,
+# после завершения кода
+
+# with open('file.txt', 'w') as data: # "as data" - создание переменной
+#     data.write('line 1\n')
+#     data.write('line 2\n') 
+
+
+# patch = 'file.txt' # создание пути к файлу
+# data = open(patch, 'r') # открытие в режиме чтения
+# for line in data:  # цикл для чтения данных из файла
+#     print(line)
+# data.close() # разрыв связи с файлом
+
+# exit()                  # позволяет не выполнять код после него (вместо комментирования)
+
+# ОТКРЫТИЕ КОДА ИЗ ФАЙЛА
+
+# import hello
+
+# print(hello.f(1))
+
+# ПРИМЕНЕНИЕ ПСЕВДОИМА
+
+# import hello as h
+
+# print(h.f(1))
+
+# ОПЯТЬ ФУНКЦИИ
+
+# def new_string (symbol, count = 3):
+#     return symbol * count
+
+# print(new_string('!', 5)) # result: !!!!!
+# print(new_string('!'))    # result: !!!
+# print(new_string(4))      # result: 12
+
+# ФУНКЦИЯ ПЕРЕДАЧИ НЕОГРАНИЧЕННОГО ЧИСЛА АРГУМЕНТОВю
+# СТРОКИ (str)
+
+# def concatenatio(*params): # * означает неограниченное кол-во аргументов
+#     res: str = ""
+#     for item in params:
+#         res += item
+#     return res
+
+
+# print(concatenatio('a', 's', 'd', 'w')) # result asdw
+# print(concatenatio('a', '1', 'd', '2')) # result a1d2
+# print(concatenatio(1, 2, 3, 4)) # result TypeError  c "str" так нельзя)
+
+# ЧИСЛА (int)
+
+# def concatenatio(*params): # * означает неограниченное кол-во аргументов
+#     res: int = 0
+#     for item in params:
+#         res += item
+#     return res
+
+# print(concatenatio(1, 2, 3, 4)) # result 10
+
+# ФУНКЦИЯ РЯДА ФИБОНАЧЧИ
+
+def fib(n):
+    if n in [1,2]:
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
+
+# ВЫВОД НА ПЕЧАТЬ 
+
+list = []
+for e in range (1, 10): # вывод рядя Фибоначчи для чисел от 1 до 10
+    list.append(fib(e))
+print(list)  # result: [1, 1, 2, 3, 5, 8, 13, 21, 34]
