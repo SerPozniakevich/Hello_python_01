@@ -1,5 +1,6 @@
 from multiprocessing.sharedctypes import Value
 from random import shuffle
+from typing import Iterable
 from unittest.mock import patch
 
 
@@ -204,7 +205,7 @@ f = [1,2,3,4]
 
 # print(hello.f(1))
 
-# ПРИМЕНЕНИЕ ПСЕВДОИМА
+# ПРИМЕНЕНИЕ ПСЕВДОНИМА
 
 # import hello as h
 
@@ -245,15 +246,86 @@ f = [1,2,3,4]
 
 # ФУНКЦИЯ РЯДА ФИБОНАЧЧИ
 
-def fib(n):
-    if n in [1,2]:
-        return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+# def fib(n):
+#     if n in [1,2]:
+#         return 1
+#     else:
+#         return fib(n - 1) + fib(n - 2)
 
-# ВЫВОД НА ПЕЧАТЬ 
+# # ВЫВОД НА ПЕЧАТЬ 
 
-list = []
-for e in range (1, 10): # вывод рядя Фибоначчи для чисел от 1 до 10
-    list.append(fib(e))
-print(list)  # result: [1, 1, 2, 3, 5, 8, 13, 21, 34]
+# list = []
+# for e in range (1, 10): # вывод рядя Фибоначчи для чисел от 1 до 10
+#     list.append(fib(e))
+# print(list)  # result: [1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+# LECTION 3 LAMBDA
+#--------------------------------------------------------------
+
+# def f (x):         # присваивание переменной функцию 
+#     return x**2
+
+# g = f
+
+# print(type(f))
+# print(type(g))
+
+# print(f(4))
+# print(g(4))
+
+# Функция функций с одной переменной
+
+# def calc1(x):
+#     return x + 10
+
+# def calc2(x):
+#     return x * 10
+
+# def math(op, x):
+#     print(op(x))
+
+# Функция функций с двумя переменными
+
+# def sum(x, y):
+#     return x + y
+
+# sum = lambda x, y: x + y # Упрощённая версия записи функции (Лямбда)
+
+
+# def mult(x, y):
+#     return x * y
+
+# def calc(op, a, b):
+#     print(op(a, b))   
+
+# calc(lambda x, y: x + y, 4, 5) # Лямбду можно прописать в вызов функции
+
+# calc(sum, 4, 5) # вызываем конкретную функцию
+
+# List Comprehension  - упрощённое создание списков
+# 1. [exp for item in iterable] - exp - название, iterable - условие
+# 2. [exp for item in iterable (if conditional)]
+# [exp <if condetional> for item in iterable (if conditional)] - не использовать)))
+
+# list = []  # обычное создание листа
+
+# for i  in range(1, 100):
+#     list.append(i)
+# print(list)
+
+list = [i for i in range(1, 21)] # создание списка без условий
+print(list)
+
+list = [i for i in range(1, 21) if i % 2 == 0] # создание списка с условиями
+print(list)
+
+list = [(i, i) for i in range(1, 21) if i % 2 == 0] # создание списка кортежей с условиями
+print(list)
+
+# создание списка кортежей (число и его куб) с условиями и функцией
+
+def f(x):
+    return x ** 3
+
+list = [(i, f(i)) for i in range(1, 21) if i % 2 == 0]
+print(list)
